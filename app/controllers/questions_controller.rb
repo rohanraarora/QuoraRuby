@@ -1,11 +1,15 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
-    @current_user = current_user
+    if user_signed_in?
+      @questions = Question.all
+      @current_user = current_user
+    else
+      redirect_to auth_path
+    end
   end
 
   # GET /questions/1

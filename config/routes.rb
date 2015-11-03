@@ -4,9 +4,10 @@ Rails.application.routes.draw do
     resources :answers
   end
   devise_for :users , :controllers => {registrations: 'registrations'}
-  root 'pages#index'
+  root 'questions#index'
 
-  get 'users/:id' => 'pages#user', :as => 'profile'
+  get '/users/:id' => 'pages#user', :as => 'profile'
+  get '/auth' => 'pages#index', :as => 'auth'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

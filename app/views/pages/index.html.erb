@@ -1,36 +1,71 @@
+<div class="content">
+
+<% if notice %>
+<p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+<p class="alert alert-danger"><%= alert %></p>
+<% end %>
 <div class="container">
-  <div class="signin_container">
-    <%= form_for(@user, url: user_session_path) do |f| %>
-    <div class="fields">
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-      <br>
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+  <header>
+    <div class="logo_div">
     </div>
-    <div class="actions">
-      <%= f.submit "Sign In" %>
+  </header>
+  <div class="row">
+    <div class="card">
+      <div class="card-content">
+        <div class="row">
+        <div class="col s12 m6" id="signin_container">
+          <%= form_for(@user, url: user_session_path) do |f| %>
+          <p class="legend">Sign In</p>
+          <div class="row">
+            <div class="input-field col s12">
+              <%= f.label :email %>
+              <%= f.text_field :email %>
+            </div>
+            <div class="input-field col s12">
+              <%= f.label :password %>
+              <%= f.password_field :password %>
+            </div>
+            <div class="input-field col s6">
+              <%= f.button class: "waves-effect waves-light btn ", type: :submit do %>Sign in
+              <%end%>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <div class="col s12 m6" id="signup_container">
+          <%= form_for(@user, url: user_registration_path) do |f| %>
+          <p class="legend">Sign Up</p>
+          <div class="row">
+            <div class="input-field col s12">
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+            </div>
+            <div class="input-field col s12">
+              <%= f.label :email %>
+              <%= f.text_field :email %>
+            </div>
+            <div class="input-field col s12">
+              <%= f.label :password %>
+              <%= f.password_field :password %>
+            </div>
+            <div class="input-field col s12">
+              <%= f.label :confirm_password %>
+              <%= f.password_field :confirm_password %>
+            </div>
+            <div class="input-field col s6">
+              <%= f.button class: "waves-effect waves-light btn ", type: :submit do %>
+                Sign Up
+              <%end%>
+            </div>
+          </div>
+
+          <% end %>
+        </div>
+        </div>
+      </div>
     </div>
-    <% end %>
   </div>
-  <div class="signup_container">
-    <%= form_for(@user, url: user_registration_path) do |f| %>
-    <div class="fields">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-      <br>
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-      <br>
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-      <br>
-      <%= f.label :confirm_password %>
-      <%= f.password_field :confirm_password %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Sign Up" %>
-    </div>
-    <% end %>
-  </div>
+</div>
 </div>
