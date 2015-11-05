@@ -5,7 +5,13 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     if user_signed_in?
-      @questions = Question.all
+      @users = User.all
+      @followings = Follower.where(follower_id: current_user.id)
+      @questions = Array.new
+      @followings.each do |following|
+        @questions += following.user.questions
+      end
+      @questions += current_user.questions
       @current_user = current_user
     else
       redirect_to auth_path

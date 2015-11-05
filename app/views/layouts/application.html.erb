@@ -4,10 +4,23 @@
   <title>QuoraRuby</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <%= csrf_meta_tags %>
 </head>
 <body>
-  
+  <% if user_signed_in? %>
+  <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo" id="nav-logo">QuoraRuby</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><%= link_to 'Home', root_url %></li>
+          <li><%= link_to 'Profile', profile_path(current_user) %></li>
+          <li><%= link_to 'Sign Out',destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+  </nav>
+  <% end %>
+
 
 <%= yield %>
 

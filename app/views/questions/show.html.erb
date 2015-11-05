@@ -1,50 +1,53 @@
-<p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title grey-text text-darken-4"><%= @question.title %></span>
+        <p><%= @question.content %></p>
+      </div>
+      <div class="card-action">
+        <div class="row">
+          <div class="col s8">
+            <% if @question.user == current_user %>
+              <%= link_to "Edit", edit_question_path(@question) %>
+              <%= link_to "Destroy", @question, method: :delete, data: { confirm: "Are you sure?" } %>
+            <% end %>
+          </div>
+          <div class="col s4">
+              <%= link_to "By : " + @question.user.name, profile_path(@question.user) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Content:</strong>
-  <%= @question.content %>
-</p>
+  <% if @question.answers.count > 0 %>
+  <div class="col s8">
+    <h3>Answers</h3>
+    <% @question.answers.each do |answer| %>
+      <div class="row">
+        <div class="col s8">
+          <div class="answer">
+            <p> <%= answer.content %></p>
+            <p> By : <%= link_to answer.user.name, profile_path(answer.user) %> </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
 
-<p>
-  <strong>Upvotes:</strong>
-  <%= @question.upvotes %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= link_to @question.user.name, profile_path(@question.user) %>
-</p>
-
-<h2>Answers</h2>
-<% @question.answers.each do |answer| %>
-  <p>
-    <strong>By:</strong>
-    <%= link_to answer.user.name, profile_path(answer.user) %>
-  </p>
-
-  <p>
-    <strong>Answer:</strong>
-    <%= answer.content %>
-  </p>
-  <p><strong>Upvotes:</strong>
-    <%= answer.upvotes %>
-<% end %>
-
-<h2>Add a answer:</h2>
-<%= form_for([@question, @question.answers.build]) do |f| %>
-  <p>
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-<% if @question.user == @current_user %>
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<% end %>
-<%= link_to 'Back', questions_path %>
+  <div class="col s8">
+    <h3>Add a answer:</h3>
+    <%= form_for([@question, @question.answers.build]) do |f| %>
+      <div class="input-field">
+        <%= f.label :content %><br>
+        <%= f.text_area :content,class: "materialize-textarea" %>
+      </div>
+      <p>
+        <%= f.button class: "waves-effect waves-light btn ", type: :submit do %>Add
+        <%end%>
+      </p>
+    <% end %>
+  </div>
+</div>
