@@ -4,9 +4,10 @@ Rails.application.routes.draw do
     resources :answers
   end
   resources :followers
+  resources :question_upvotes
   devise_for :users , :controllers => {registrations: 'registrations'}
-  root 'questions#index'
 
+  root 'questions#index'
   get '/users/:id' => 'pages#user', :as => 'profile'
   get '/auth' => 'pages#index', :as => 'auth'
   # The priority is based upon order of creation: first created -> highest priority.

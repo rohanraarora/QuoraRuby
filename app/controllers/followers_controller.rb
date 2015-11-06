@@ -12,9 +12,9 @@ class FollowersController < ApplicationController
   end
 
   def destroy
-  @follower = User.find(params[:id]).followers.find_by follower_id: current_user.id
-  @follower.destroy
-  flash[:notice] = "Unfollowed."
-  redirect_to :back
-end
+    @follower = User.find(params[:id]).followers.find_by follower_id: current_user.id
+    @follower.destroy
+    flash[:notice] = "Unfollowed."
+    redirect_to :back
+  end
 end

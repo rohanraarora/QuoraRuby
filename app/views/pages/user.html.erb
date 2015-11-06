@@ -59,14 +59,28 @@
         <div class="col s12">
           <div class="card">
             <div class="card-content">
-              <span class="card-title grey-text text-darken-4"><%= question.title %></span>
-              <p><%= question.content %></p>
+              <div class="row">
+                <div class="col s10">
+                  <span class="card-title grey-text text-darken-4"><%= question.title %></span>
+                  <p><%= question.content %></p>
+                </div>
+                <div class="col s2">
+                  <p class="upvotes_count"><%= question.upvoters.count %></p>
+                </div>
+              </div>
+
             </div>
             <div class="card-action">
                   <%= link_to "Show", question %>
                   <% if question.user == @current_user %>
                     <%= link_to "Edit", edit_question_path(question) %>
                     <%= link_to "Destroy", question, method: :delete, data: { confirm: "Are you sure?" } %>
+                  <% else %>
+                    <% if question.upvoters.include?(current_user) %>
+                      <%= link_to "Downvote" ,question_upvote_path(:id => question.id),method: :delete %>
+                    <% else %>
+                      <%= link_to "Upvote", question_upvotes_path(:id => question.id),method: :post %>
+                    <% end %>
                   <% end %>
             </div>
           </div>
